@@ -1,0 +1,10 @@
+# Seestar S50 Color Calibration Script
+# Input: result.fit (stacked linear image with RA/DEC in FITS header)
+# Output: result_calibrated.fit
+
+load result
+autocrop
+rmgreen 1
+pcc
+save result_calibrated
+close

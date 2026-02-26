@@ -1,0 +1,11 @@
+# Seestar S50 Stacking Script - Lights Only (no darks/biases/flats)
+# Working directory must be set to the results folder via siril-cli -d flag
+# Expects .fits/.fit sub-frames in a "lights" subfolder
+
+cd lights
+convert light -out=../process -fitseq
+cd ../process
+register pp_light
+stack r_pp_light rej 3 3 -norm=addscale -output_norm -out=../result
+cd ..
+close

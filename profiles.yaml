@@ -1,0 +1,73 @@
+# Processing profiles keyed by object type
+# Selected automatically based on SIMBAD OTYPE classification
+# See: https://simbad.u-strasbg.fr/simbad/sim-display?data=otypes
+
+emission_nebula:
+  description: "Emission and reflection nebulae (HII regions, supernova remnants)"
+  otypes: ["HII", "RNe", "SNR", "ISM", "SFR"]
+  denoise_strength: 0.3
+  deconv_mode: "non_stellar"
+  deconv_amount: 0.4
+  star_split: true
+  stretch_strategy: "aggressive"
+  saturation_boost: 1.2
+
+galaxy:
+  description: "Galaxies of all types (spiral, elliptical, irregular, AGN)"
+  otypes: ["G", "GiG", "GiP", "EmG", "SyG", "SBG", "AGN", "QSO"]
+  denoise_strength: 0.5
+  deconv_mode: "both"
+  deconv_amount: 0.6
+  star_split: false
+  stretch_strategy: "moderate"
+  saturation_boost: 1.0
+
+star_cluster:
+  description: "Open and globular star clusters"
+  otypes: ["OpCl", "GlCl", "As*", "Cl*+N"]
+  denoise_strength: 0.5
+  deconv_mode: "stellar"
+  deconv_amount: 0.5
+  star_split: false
+  stretch_strategy: "moderate"
+  saturation_boost: 1.0
+
+planetary_nebula:
+  description: "Planetary nebulae"
+  otypes: ["PN"]
+  denoise_strength: 0.4
+  deconv_mode: "non_stellar"
+  deconv_amount: 0.5
+  star_split: true
+  stretch_strategy: "moderate"
+  saturation_boost: 1.1
+
+dark_nebula:
+  description: "Dark nebulae and molecular clouds"
+  otypes: ["DkN", "MoC", "DNe", "Cl*"]
+  denoise_strength: 0.2
+  deconv_mode: "non_stellar"
+  deconv_amount: 0.3
+  star_split: true
+  stretch_strategy: "aggressive"
+  saturation_boost: 1.0
+
+star_field:
+  description: "Stars, double stars, and variable stars"
+  otypes: ["*", "**", "V*", "Ce*"]
+  denoise_strength: 0.5
+  deconv_mode: "stellar"
+  deconv_amount: 0.5
+  star_split: false
+  stretch_strategy: "moderate"
+  saturation_boost: 0.8
+
+generic_dso:
+  description: "Generic deep sky object (fallback profile)"
+  otypes: []
+  denoise_strength: 0.4
+  deconv_mode: "both"
+  deconv_amount: 0.4
+  star_split: true
+  stretch_strategy: "moderate"
+  saturation_boost: 1.0
