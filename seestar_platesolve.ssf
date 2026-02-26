@@ -1,0 +1,11 @@
+# Seestar S50 Plate Solving Script
+# Input: final_result.fit (stretched, recomposed image)
+# Output: final_result.fit with WCS headers, plus .tif and .jpg exports
+# Seestar S50 specs: focal length 250mm, pixel size 2.9um
+
+load final_result
+platesolve -focal=250 -pixelsize=2.9
+save final_result
+savetif final_result
+savejpg final_result 95
+close

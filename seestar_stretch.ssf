@@ -1,0 +1,32 @@
+# Seestar S50 Star Split, Stretch, and Recomposition Script
+# Input: result_denoised.fit (linear, processed)
+# Output: final_result.fit, final_result.tif, final_result.jpg
+
+# Phase 6: Star removal using StarNet v2
+# starnet -stretch applies a temporary stretch for better star detection on linear data
+load result_denoised
+starnet -stretch
+save starless
+
+# Create star mask: original minus starless
+pm "$result_denoised$ - $starless$ + 0"
+save starmask
+
+# Phase 7: Stretch each component independently
+# Stretch starless image (aggressive - brings out faint nebulosity)
+load starless
+autostretch
+save starless_stretched
+
+# Stretch star mask (gentle - prevents star bloat)
+load starmask
+autostretch
+save starmask_stretched
+
+# Recompose: screen blend using max (lighten mode)
+load starless_stretched
+pm "max($starless_stretched$, $starmask_stretched$)"
+save final_result
+savetif final_result
+savejpg final_result 95
+close

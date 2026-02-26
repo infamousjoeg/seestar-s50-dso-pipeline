@@ -1,0 +1,62 @@
+# Seestar S50 Astrophotography Pipeline Configuration
+# Adjust paths and defaults to match your system
+
+# External tool paths (adjust to your installation)
+tools:
+  siril_cli: "C:\\Program Files\\Siril\\bin\\siril-cli.exe"
+  graxpert: "graxpert"  # pip-installed version; or full path to GraXpert-win64.exe
+  cosmic_clarity: "C:\\AstroTools\\CosmicClarity\\SetiAstroCosmicClarity.exe"
+
+# Seestar S50 hardware constants (do not change)
+seestar:
+  focal_length: 250        # mm
+  pixel_size: 2.9          # micrometers
+  plate_scale: 2.39        # arcsec/pixel
+  fov_width: 1.28          # degrees
+  fov_height: 0.72         # degrees
+  default_bayer: "GBRG"
+  typical_gain: 80
+  typical_exposure: 10.0   # seconds
+
+# Site defaults (used when FITS headers lack location data)
+site:
+  name: "My Observatory"
+  bortle: 4
+  sqm: 20.5
+  latitude: 0.0
+  longitude: 0.0
+
+# AstroBin settings
+astrobin:
+  title_template: "{object_name} | Seestar S50 | {integration_min:.0f} min"
+  description_template: |
+    {object_common_name}
+
+    Captured with ZWO Seestar S50 from {site} (Bortle {bortle})
+
+    Acquisition:
+      {num_subs} x {exposure}s subs ({integration_min:.1f} min total integration)
+      Dates: {dates}
+      Gain: {gain} | Sensor temp: ~{sensor_temp}C
+
+    Processing (automated pipeline):
+      {processing_steps}
+
+# Processing defaults (can be overridden per-profile in profiles.yaml)
+processing:
+  stacking:
+    rejection_low: 3       # sigma clipping low threshold
+    rejection_high: 3      # sigma clipping high threshold
+    normalization: "addscale"
+  graxpert:
+    background_correction: "Subtraction"
+    gpu: true
+  cosmic_clarity:
+    gpu: "cuda"
+  output:
+    jpg_quality: 95
+
+# SIMBAD query cache
+simbad:
+  cache_file: "simbad_cache.json"
+  timeout: 30              # seconds
