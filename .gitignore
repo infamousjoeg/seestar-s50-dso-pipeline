@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+*.pyo
+simbad_cache.json
+pipeline_info.json
