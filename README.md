@@ -38,7 +38,13 @@ pip install astropy astroquery pyyaml Pillow numpy
 
 ### 3. Download Siril Star Catalogs (for offline plate solving)
 
-Open Siril > Edit > Preferences > Astrometry > Download Gaia DR3 catalog (~1-3 GB). This is a one-time download.
+Open Siril and run the built-in Catalogue Installer script:
+
+1. Go to **Scripts > Python Scripts > Siril_Catalog_Installer**
+2. Select **Astrometric** catalog type and choose your sky coverage (or **All** for full sky)
+3. Click **Install** (~1.5 GB download, one-time setup)
+
+The script automatically configures the catalog path in Siril's preferences. To verify or change the path manually, open **☰ > Preferences (Ctrl+P) > Astrometry > Local star catalogues**.
 
 ### 4. Configure the Pipeline
 
@@ -206,7 +212,7 @@ The pipeline looks for subs in either a `lights/` subfolder or directly in the p
 ## Troubleshooting
 
 - **PCC fails**: Ensure Siril star catalogs are downloaded and internet is available for the first solve
-- **Plate solving fails**: Download Gaia DR3 catalog in Siril preferences
+- **Plate solving fails**: Install the Gaia DR3 astrometric catalog via Scripts > Python Scripts > Siril_Catalog_Installer
 - **GraXpert not found**: Try `pip install graxpert[cuda]` or set the full path in `pipeline.yaml`
 - **Cosmic Clarity fails**: Ensure TIFF output is being generated; check the tool's output directory
 - **SIMBAD query fails**: The pipeline caches results in `simbad_cache.json`; works offline after first run
